@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PostApp</string>
+    <string name="title_activity_create_data_for_order">CreateDataForOrderActivity</string>
+    <string name="title_activity_daly_orders">DalyOrders</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/ruslan/Desktop/PostApp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="d96fab58275a6c647bf3fccbd4c66d96814ab675">
+        <dex dex="/Users/ruslan/Desktop/PostApp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_e51038f90078b7f4a6a617a410367ecf20e397c8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ruslan/Desktop/PostApp/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/ruslan/Desktop/PostApp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_01f86447a198dd0e295f5f3aac9c6e9580a83155/classes.dex" />
+    </item>
+
+</items>
