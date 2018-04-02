@@ -71,24 +71,4 @@ public class DataAdapter  extends BaseAdapter {
         objects.addAll(newlist);
         this.notifyDataSetChanged();
     }
-/*
-    // содержимое корзины
-    ArrayList<Product> getBox() {
-        ArrayList<Product> box = new ArrayList<Product>();
-        for (Product p : objects) {
-            // если в корзине
-            if (p.box)
-                box.add(p);
-        }
-        return box;
-    }
-
-    // обработчик для чекбоксов
-    OnCheckedChangeListener myCheckChangeList = new OnCheckedChangeListener() {
-        public void onCheckedChanged(CompoundButton buttonView,
-                                     boolean isChecked) {
-            // меняем данные товара (в корзине или нет)
-            getProduct((Integer) buttonView.getTag()).box = isChecked;
-        }
-    };*/
 }

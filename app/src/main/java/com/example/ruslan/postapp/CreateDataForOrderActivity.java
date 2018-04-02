@@ -6,6 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,8 +23,8 @@ public class CreateDataForOrderActivity extends Activity implements View.OnClick
     TextView currentDate;
     Button saveButton;
     String dateCreate;
+    String currentTime;
     private DatabaseReference mDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,28 +46,62 @@ public class CreateDataForOrderActivity extends Activity implements View.OnClick
             @Override
             public void onSelectedDayChange(CalendarView arg0, int year, int month,
                                             int date) {
-
-                dateCreate = "Список отправок созданный:  " + " " + date +" / " + (month+1) + " / " + year;
+                currentTime = getCurrentTime();
+                dateCreate = "Список отправок:" +" " + (getNameMonth(month+1)) + " / " + date + " / " + year;
             }
         });
     }
 
+    public static String getCurrentTime() {
+        //date output format
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        return dateFormat.format(cal.getTime());
+    }
+
+    private String getNameMonth(int number) {
+        switch(number) {
+            case 1:
+                return "Январь";
+            case 2:
+                return "Феврфль";
+            case 3:
+                return "Март";
+            case 4:
+                return "Апрель";
+            case 5:
+                return "Март";
+            case 6:
+                return "Июнь";
+            case 7:
+                return "Июль";
+            case 8:
+                return "Август";
+            case 9:
+                return "Сентябрь";
+            case 10:
+                return "Октябрь";
+            case 11:
+                return "Ноябрь";
+            case 12:
+                return "Декабрь";
+            default:
+                return "";
+        }
+    }
     @Override
     public void onClick(View v) {
-        // по id определеяем кнопку, вызвавшую этот обработчик
         switch (v.getId()) {
             case R.id.saveButton:
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("data", dateCreate);
+                childUpdates.put("currentTime", currentTime);
                 String key = mDatabase.child("createDataOrder").push().getKey();
                 DatabaseReference date = mDatabase.child("createDataOrder").child(key);
                 childUpdates.put("uid", key);
                 date.updateChildren(childUpdates);
                 break;
-
             default:break;
-
         }
     }
-
 }

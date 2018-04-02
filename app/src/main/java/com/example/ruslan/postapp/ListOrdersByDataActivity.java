@@ -22,12 +22,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AdapterView;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Objects;
 
 public class ListOrdersByDataActivity extends AppCompatActivity {
 
     ArrayList<DataCreate> dataCreateOrder = new ArrayList<DataCreate>();
+    ArrayList<DataCreate> dataCreateSorted = new ArrayList<DataCreate>();
     ListView tableView;
     DataAdapter dataAdapter;
 
@@ -45,10 +48,10 @@ public class ListOrdersByDataActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-
-                //String day = dataCreateOrder.get(position);
+                DataCreate data = dataCreateOrder.get(position);
+                String s =  data.uid;
                 Intent intent = new Intent(view.getContext(),DalyOrders.class);
-                //intent.putExtra("uid", day);
+                intent.putExtra("uid", data.uid);
                 startActivity(intent);
             }
         });
@@ -66,8 +69,19 @@ public class ListOrdersByDataActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String,Object> data = (Map<String, Object>) dataSnapshot.getValue();
-                dataCreateOrder = DataCreate.getArrayData(data);
-                dataAdapter.updateReceiptsList(dataCreateOrder);
+
+                if (data != null) {
+                    dataCreateOrder = DataCreate.getArrayData(data);
+                    dataAdapter.updateReceiptsList(dataCreateOrder);
+                }
+
+                /*Collections.sort(dataCreateOrder, new Comparator<DataCreate>() {
+                    @Override
+                    public int compare(DataCreate dataCreate, DataCreate t1) {
+                        return dataCreate.date.compareTo(t1.date);
+                    }
+
+                });*/
             }
 
             @Override
