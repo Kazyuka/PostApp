@@ -2,10 +2,12 @@ package com.example.ruslan.postapp;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,6 +38,7 @@ public class CreateDataForOrderActivity extends Activity implements View.OnClick
         mDatabase = FirebaseDatabase.getInstance().getReference();
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
+        saveButton.setVisibility(View.INVISIBLE);
         getDataFromCalendar();
     }
 
@@ -46,6 +49,7 @@ public class CreateDataForOrderActivity extends Activity implements View.OnClick
             @Override
             public void onSelectedDayChange(CalendarView arg0, int year, int month,
                                             int date) {
+                saveButton.setVisibility(View.VISIBLE);
                 currentTime = getCurrentTime();
                 dateCreate = "Список отправок:" +" " + (getNameMonth(month+1)) + " / " + date + " / " + year;
             }
@@ -93,6 +97,7 @@ public class CreateDataForOrderActivity extends Activity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.saveButton:
+                saveButton.setVisibility(View.INVISIBLE);
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("data", dateCreate);
                 childUpdates.put("currentTime", currentTime);
@@ -100,8 +105,18 @@ public class CreateDataForOrderActivity extends Activity implements View.OnClick
                 DatabaseReference date = mDatabase.child("createDataOrder").child(key);
                 childUpdates.put("uid", key);
                 date.updateChildren(childUpdates);
+                showToast(v);
                 break;
             default:break;
         }
+    }
+
+    public void showToast(View view) {
+        //создаем и отображаем текстовое уведомление
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Вы создали новый заказ",
+                Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

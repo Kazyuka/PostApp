@@ -3,12 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="/Users/ruslan/Desktop/PostApp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="/Users/ruslan/.android/build-cache/7469bf04fb5f4e02d578275efb4fd33a0f067a8a/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.0"
-        sha1="68fcce18c604b362069be14894057182a6f7dcb0">
-        <dex dex="/Users/ruslan/Desktop/PostApp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_e51038f90078b7f4a6a617a410367ecf20e397c8/classes.dex" />
+        sha1="8ec8378e8d7aa3104f60823e6350f2728d3609ba">
+        <dex dex="/Users/ruslan/Desktop/PostApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d6b406e61d3d18a83a02118968ffaddca22c76d6/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -18,6 +18,15 @@
         revision="26.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
         <dex dex="/Users/ruslan/Desktop/PostApp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_01f86447a198dd0e295f5f3aac9c6e9580a83155/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ruslan/Desktop/PostApp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="1d98443089e69308087037bf2e77ee2b9b827438">
+        <dex dex="/Users/ruslan/Desktop/PostApp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_e51038f90078b7f4a6a617a410367ecf20e397c8/classes.dex" />
     </item>
 
 </items>

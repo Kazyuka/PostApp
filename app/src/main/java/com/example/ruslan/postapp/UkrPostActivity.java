@@ -1,6 +1,8 @@
 package com.example.ruslan.postapp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,10 @@ import java.util.Map;
 
 import android.util.Base64;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,7 +38,7 @@ public class UkrPostActivity extends AppCompatActivity {
     ArrayList<ImageObject> imagesFromFirebase = new ArrayList<ImageObject>();
     private DatabaseReference mDatabase;
     ImageAdapter dataAdapter;
-    ListView ukrPostList;
+    SwipeMenuListView ukrPostList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,24 +47,71 @@ public class UkrPostActivity extends AppCompatActivity {
         udiId = intent.getStringExtra("uid");
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        ukrPostList = (ListView) findViewById(R.id.ukrPostList);
+        ukrPostList = (SwipeMenuListView) findViewById(R.id.ukrPostList);
         dataAdapter = new ImageAdapter(this, imagesFromFirebase);
         dataAdapter.notifyDataSetChanged();
         ukrPostList.setAdapter(dataAdapter);
         getDataFromServer();
+        createSwipe();
+    }
+
+    private void createSwipe() {
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "open" item
+                SwipeMenuItem openItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                openItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                // set item width
+                openItem.setWidth(150);
+                // set item title
+                openItem.setTitle("Delete");
+                // set item title fontsize
+                openItem.setTitleSize(18);
+                // set item title font color
+                openItem.setTitleColor(Color.WHITE);
+                // add to menu
+                menu.addMenuItem(openItem);
+
+            }
+        };
+
+        ukrPostList.setMenuCreator(creator);
+
+        ukrPostList.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        ImageObject data = imagesFromFirebase.get(position);
+                        String key =  data.uid;
+                        mDatabase.child(IMAGE_ORDER).child(UKR_POST).child(udiId).child(key).removeValue();
+                        getDataFromServer();
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     public void encodeBitmapAndSaveToFirebase(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("image", imageEncoded);
 
-        String key = mDatabase.child(IMAGE_ORDER).push().getKey();
-        DatabaseReference date = mDatabase.child(IMAGE_ORDER).child(UKR_POST).child(udiId);
+        String key = mDatabase.child(IMAGE_ORDER).child(UKR_POST).child(udiId).push().getKey();
+        DatabaseReference date = mDatabase.child(IMAGE_ORDER).child(UKR_POST).child(udiId).child(key);
+        String time = NewPostActivity.getCurrentTime();
+        childUpdates.put("currentTime", time);
         childUpdates.put("uid", key);
-        date.push().setValue(childUpdates);
+        date.setValue(childUpdates);
         getDataFromServer();
     }
 
@@ -74,6 +127,9 @@ public class UkrPostActivity extends AppCompatActivity {
 
                 if (data != null) {
                     imagesFromFirebase = ImageObject.getArrayData(data);
+                    dataAdapter.updateReceiptsList(imagesFromFirebase);
+                } else {
+                    imagesFromFirebase.clear();
                     dataAdapter.updateReceiptsList(imagesFromFirebase);
                 }
             }

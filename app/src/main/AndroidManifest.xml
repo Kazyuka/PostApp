@@ -10,7 +10,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/nameListOrder"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -27,8 +27,10 @@
         <activity
             android:name=".DalyOrders"
             android:label="@string/title_activity_daly_orders" />
-        <activity android:name=".NewPostActivity" />
-        <activity android:name=".UkrPostActivity"></activity>
+        <activity android:name=".NewPostActivity"
+            android:label="@string/nameListNewPost"/>
+        <activity android:name=".UkrPostActivity"
+            android:label="@string/nameListUkrPost"></activity>
     </application>
 
 </manifest>

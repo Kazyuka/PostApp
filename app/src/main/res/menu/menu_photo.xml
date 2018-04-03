@@ -5,7 +5,7 @@
     <item
         android:id="@+id/photoButtton"
         android:icon="@drawable/photo"
-        android:title="@string/app_name"
+        android:title="@string/empty"
         app:showAsAction="ifRoom"
         />
 </menu>

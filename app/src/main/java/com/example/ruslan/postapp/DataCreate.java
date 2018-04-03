@@ -2,6 +2,8 @@ package com.example.ruslan.postapp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Map;
 
@@ -45,6 +47,15 @@ public class DataCreate {
                        DataCreate d = new DataCreate(dateString,id,time);
                        dateAarray.add(d);
                }
+
+                Collections.sort(dateAarray, new Comparator<DataCreate>() {
+                        @Override
+                        public int compare(DataCreate dataCreate, DataCreate t1) {
+                                return t1.currentTime.compareTo(dataCreate.currentTime);
+                        }
+
+                });
+
                 return  dateAarray;
         }
 }
