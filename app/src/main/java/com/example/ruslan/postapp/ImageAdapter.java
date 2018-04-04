@@ -11,6 +11,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 /**
  * Created by ruslan on 02.04.2018.
  */
@@ -55,7 +58,12 @@ public class ImageAdapter  extends BaseAdapter {
         }
 
         ImageObject p = getProduct(position);
-        ((ImageView) view.findViewById(R.id.imageView)).setImageBitmap(p.image);
+
+       // photoView.setImageResource(R.drawable.image);
+        ImageView im =((ImageView) view.findViewById(R.id.imageView));
+        im.setImageBitmap(p.image);
+        PhotoViewAttacher ph = new PhotoViewAttacher(im);
+        ph.update();
 
         return view;
     }
