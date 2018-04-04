@@ -106,6 +106,7 @@ public class CreateDataForOrderActivity extends Activity implements View.OnClick
                 childUpdates.put("uid", key);
                 date.updateChildren(childUpdates);
                 showToast(v);
+                finish();
                 break;
             default:break;
         }
@@ -115,7 +116,7 @@ public class CreateDataForOrderActivity extends Activity implements View.OnClick
         //создаем и отображаем текстовое уведомление
         Toast toast = Toast.makeText(getApplicationContext(),
                 "Вы создали новый заказ",
-                Toast.LENGTH_LONG);
+                Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }

@@ -15,7 +15,9 @@
         <com.baoyz.swipemenulistview.SwipeMenuListView
             android:id="@+id/newPostList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.baoyz.swipemenulistview.SwipeMenuListView>
+            android:layout_height="wrap_content"
+            android:divider="#FFCC00"
+            android:dividerHeight="15px"></com.baoyz.swipemenulistview.SwipeMenuListView>
 
 
         <TextView

@@ -44,7 +44,6 @@ public class DalyOrders extends Activity implements View.OnClickListener {
                 intent2.putExtra("uid", udiId);
                 startActivity(intent2);
                 break;
-
             default:break;
 
         }

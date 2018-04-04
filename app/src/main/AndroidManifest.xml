@@ -5,7 +5,9 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -14,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".ListOrdersByDataActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,10 +30,13 @@
         <activity
             android:name=".DalyOrders"
             android:label="@string/title_activity_daly_orders" />
-        <activity android:name=".NewPostActivity"
-            android:label="@string/nameListNewPost"/>
-        <activity android:name=".UkrPostActivity"
-            android:label="@string/nameListUkrPost"></activity>
+        <activity
+            android:name=".NewPostActivity"
+            android:label="@string/nameListNewPost" />
+        <activity
+            android:name=".UkrPostActivity"
+            android:label="@string/nameListUkrPost" />
+        <activity android:name=".TestImageActivity"></activity>
     </application>
 
 </manifest>
